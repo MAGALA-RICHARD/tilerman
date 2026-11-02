@@ -1,0 +1,7 @@
+README.rst
+pyproject.toml
+src/tilerman.egg-info/PKG-INFO
+src/tilerman.egg-info/SOURCES.txt
+src/tilerman.egg-info/dependency_links.txt
+src/tilerman.egg-info/requires.txt
+src/tilerman.egg-info/top_level.txt

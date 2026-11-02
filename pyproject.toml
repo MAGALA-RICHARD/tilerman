@@ -30,8 +30,6 @@ classifiers = [
     "Topic :: Scientific/Engineering :: GIS",
 ]
 
-[project.optional-dependencies]
-
 [tool.setuptools]
 package-dir = {"" = "src"}
 
