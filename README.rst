@@ -76,7 +76,7 @@ Import the tiling functions:
 
 .. code-block:: python
 
-   from tilerman.tiles import tile_by_capacity, tile_cloud_by_length
+   from tilerman.tiles import tile_by_capacity as  tile_cloud_by_capacity, tile_cloud_by_length as tile_cloud_by_length
 
 
 Capacity-Based Tiling

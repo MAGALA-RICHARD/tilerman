@@ -5,7 +5,7 @@ from functools import cache
 import unittest
 import numpy as np
 import laspy
-
+from tilerman.tiles import tile_by_capacity as tile_cloud_by_capacity, tile_cloud_by_length as tile_cloud_by_length
 from tiles import tile_cloud_by_capacity, tile_cloud_by_length
 
 LAZ_FILENAME =  Path('../tiler_test/synthetic.laz')
