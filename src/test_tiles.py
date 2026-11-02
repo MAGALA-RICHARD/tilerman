@@ -108,8 +108,8 @@ class TestTiles(unittest.TestCase):
     def test_all_points_are_tiled(self):
         size = 10053
         tmp_file = self.output_dir / "tmp.laz"
-        input =  sample_cloud(tmp_file, n=size)
-        outputs = tile_cloud_by_capacity(input, self.output_pattern, capacity=50, )
+        input_laz =  sample_cloud(tmp_file, n=size)
+        outputs = tile_cloud_by_capacity(input_laz, self.output_pattern, capacity=50, )
         total =0
         points = []
         for output in outputs:
@@ -176,11 +176,7 @@ class TestTileCloudByLength(unittest.TestCase):
 
     def setUp(self):
         self.input_file = sample_cloud_by_length(
-            self.test_dir / "input.las",
-            nx=10,
-            ny=10,
-            spacing=1.0,
-        )
+            self.test_dir / "input.las",  nx=10, ny=10,spacing=1.0,)
         self.output_pattern = self.test_dir / "tile_#.las"
 
     def tearDown(self):
@@ -201,7 +197,6 @@ class TestTileCloudByLength(unittest.TestCase):
     def test_tiles_are_created(self):
         outputs = tile_cloud_by_length(self.input_file,self.output_pattern, length=5.0, )
         self.assertGreater(len(outputs), 0)
-
         for output in outputs:
             self.assertTrue(output.exists())
 
@@ -211,11 +206,7 @@ class TestTileCloudByLength(unittest.TestCase):
 
     def test_output_names(self):
         outputs = tile_cloud_by_length( self.input_file,self.output_pattern,length=5.0,)
-        expected = [
-            "tile_1.las",
-            "tile_2.las",
-            "tile_3.las",
-            "tile_4.las",  ]
+        expected = [ "tile_1.las","tile_2.las", "tile_3.las","tile_4.las",  ]
         self.assertEqual([file.name for file in outputs], expected, )
 
     def test_all_points_preserved_without_buffer(self):
@@ -235,7 +226,6 @@ class TestTileCloudByLength(unittest.TestCase):
 
     def test_single_large_tile(self):
         outputs = tile_cloud_by_length(self.input_file, self.output_pattern, length=100.0,)
-
         self.assertEqual(len(outputs), 1)
         self.assertEqual(
             total_points(outputs[0]),
@@ -256,17 +246,14 @@ class TestTileCloudByLength(unittest.TestCase):
             self.input_file,
             self.output_pattern,
             length=5.0, )
-
         original_xyz = { tuple(row)
             for row in np.column_stack( (original.x, original.y, original.z) )}
-
         tiled_xyz = set()
         for output in outputs:
             las = laspy.read(output)
             tiled_xyz.update(tuple(row)
                 for row in np.column_stack(
                     (las.x, las.y, las.z)))
-
         self.assertEqual(tiled_xyz, original_xyz)
 
 
