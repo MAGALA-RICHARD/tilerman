@@ -30,8 +30,6 @@ classifiers = [
     "Topic :: Scientific/Engineering :: GIS",
 ]
 
-[tool.setuptools]
-package-dir = {"" = "tilerman"}
-
 [tool.setuptools.packages.find]
-where = ["tilerman"]
+where = ["."]
+include = ["tilerman*"]
