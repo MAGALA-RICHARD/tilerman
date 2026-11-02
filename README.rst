@@ -6,9 +6,9 @@ into smaller spatial tiles.
 
 It supports two tiling strategies:
 
-* **Capacity-based tiling** — splits a point cloud into spatially ordered chunks
+* **Capacity-based tiling** - splits a point cloud into spatially ordered chunks
   containing no more than a specified number of points.
-* **Length-based tiling** — splits a point cloud into square XY tiles with a
+* **Length-based tiling** - splits a point cloud into square XY tiles with a
   specified side length and optional overlap buffer.
 
 Tilerman preserves the LAS header and existing point attributes when writing
@@ -29,7 +29,7 @@ The main dependencies are:
 * ``lazrs``
 * ``numpy``
 
-``lazrs`` provides LASzip-compatible LAZ compression and decompression support.
+``lazrs`` provides LAZ compression and decompression support.
 
 
 Install from Source
@@ -46,8 +46,6 @@ For development, install it in editable mode:
 .. code-block:: bash
 
    pip install -e .
-
-If you are using a virtual environment, activate it before installation.
 
 
 Project Structure
@@ -75,7 +73,10 @@ Import the tiling functions:
 
 .. code-block:: python
 
-   from tilerman.tiles import tile_by_capacity as  tile_cloud_by_capacity, tile_cloud_by_length as tile_cloud_by_length
+   from tilerman.tiles import (
+       tile_by_capacity as tile_cloud_by_capacity,
+       tile_cloud_by_length,
+   )
 
 
 Capacity-Based Tiling
@@ -84,8 +85,8 @@ Capacity-Based Tiling
 ``tile_by_capacity`` divides a point cloud into spatially ordered tiles with a
 maximum number of points per tile.
 
-Points are ordered using Morton or Z-order indexing so that points that are
-close spatially tend to remain close in the output sequence.
+Points are ordered using Morton or Z-order indexing so that spatially nearby
+points tend to remain close in the output ordering.
 
 Example:
 
@@ -114,24 +115,6 @@ This may produce:
 The ``#`` symbol in the output pattern is replaced automatically with the tile
 number.
 
-For example:
-
-.. code-block:: python
-
-   tile_by_capacity(
-       "cloud.laz",
-       "output/cloud_#.laz",
-       capacity=100_000,
-   )
-
-could produce:
-
-.. code-block:: text
-
-   output/cloud_1.laz
-   output/cloud_2.laz
-   output/cloud_3.laz
-
 
 Length-Based Tiling
 -------------------
@@ -152,13 +135,13 @@ Example:
    )
 
 If the point cloud uses projected coordinates in metres, ``length=10.0``
-creates tiles that are approximately 10 m by 10 m.
+creates tiles approximately 10 m by 10 m.
 
 
 Using a Buffer
 ~~~~~~~~~~~~~~
 
-An optional buffer can be used to create overlap between neighboring tiles.
+An optional buffer can create overlap between neighboring tiles.
 
 .. code-block:: python
 
@@ -166,9 +149,10 @@ An optional buffer can be used to create overlap between neighboring tiles.
        "data/cloud.laz",
        "tiles/tile_#.laz",
        length=10.0,
-       buffer=0.5,)
+       buffer=0.5,
+   )
 
-In this example, every tile is expanded by 0.5 coordinate units in each XY
+In this example, each tile is expanded by 0.5 coordinate units in every XY
 direction.
 
 Because buffered tiles overlap, points near tile boundaries may appear in more
@@ -188,7 +172,7 @@ LAZ files require a compression backend. Tilerman installs ``lazrs`` through:
 
    laspy[lazrs]
 
-If LAZ support is unavailable, it can also be installed manually:
+If LAZ support is unavailable, install it manually:
 
 .. code-block:: bash
 
@@ -200,16 +184,17 @@ Output Directories
 
 Output directories are created automatically when they do not exist.
 
-For example:
+Example:
 
 .. code-block:: python
 
    tile_by_capacity(
        "cloud.laz",
        "results/tiles/tile_#.laz",
-       capacity=250_000,)
+       capacity=250_000,
+   )
 
-will automatically create:
+This automatically creates directories such as:
 
 .. code-block:: text
 
@@ -264,7 +249,6 @@ The following example performs both types of tiling:
 
    from tilerman.tiles import tile_by_capacity, tile_cloud_by_length
 
-
    capacity_tiles = tile_by_capacity(
        "data/model.laz",
        "output/capacity/tile_#.laz",
@@ -316,17 +300,16 @@ For example, when coordinates are expressed in metres:
 
 .. code-block:: python
 
-   length=10.0
+   length = 10.0
 
-represents a 10 m tile side length.
+this represents a tile with a 10 m side length.
 
-Using geographic longitude and latitude coordinates directly is generally not
-recommended for fixed-distance tiling because degrees are angular units rather
-than constant physical distances.
+Using longitude and latitude directly is generally not recommended for
+fixed-distance tiling because degrees are angular units rather than constant
+physical distances.
 
 
 License
 =======
 
-Add the project license information here when the package license is finalized.
-```
+MIT license
