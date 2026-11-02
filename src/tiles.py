@@ -159,35 +159,22 @@ def tile_cloud_by_length(input_file, output_pattern, length, buffer=0.0):
 
     outputs = []
     index = 1
-
     xs = np.arange(xmin, xmax, length)
     ys = np.arange(ymin, ymax, length)
-
     for x0 in xs:
         for y0 in ys:
             x1, y1 = x0 + length, y0 + length
-
             mask = (
                 (x >= x0 - buffer) & (x < x1 + buffer) &
                 (y >= y0 - buffer) & (y < y1 + buffer))
-
             if not np.any(mask):
                 continue
-
             out = Path(output_pattern.replace("#", str(index)))
             out.parent.mkdir(parents=True, exist_ok=True)
             tile = laspy.LasData(las.header)
             tile.points = las.points[mask]
             tile.write(str(out))
-
             outputs.append(out)
             index += 1
 
     return outputs
-if __name__ == "__main__":
-    laz = Path(r"../tiler_test/odm_georeferencing/odm_georeferenced_model.laz").resolve()
-    out_file = tile_cloud_by_capacity(
-        laz,
-        "../tiler_test/tiles/tile_#.laz",
-        capacity=300_000,
-    )

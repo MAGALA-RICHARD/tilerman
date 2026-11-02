@@ -189,10 +189,7 @@ class TestTileCloudByLength(unittest.TestCase):
 
     def test_invalid_length(self):
         with self.assertRaises(ValueError):
-            tile_cloud_by_length(
-                self.input_file,
-                self.output_pattern,
-                length=0, )
+            tile_cloud_by_length(self.input_file,self.output_pattern, length=0, )
 
     def test_tiles_are_created(self):
         outputs = tile_cloud_by_length(self.input_file,self.output_pattern, length=5.0, )
@@ -210,11 +207,8 @@ class TestTileCloudByLength(unittest.TestCase):
         self.assertEqual([file.name for file in outputs], expected, )
 
     def test_all_points_preserved_without_buffer(self):
-        outputs = tile_cloud_by_length( self.input_file, self.output_pattern,  length=5.0,
-            buffer=0.0, )
-        tiled_points = sum(
-            total_points(file)
-            for file in outputs)
+        outputs = tile_cloud_by_length( self.input_file, self.output_pattern,  length=5.0, buffer=0.0, )
+        tiled_points = sum( total_points(file) for file in outputs)
         self.assertEqual( tiled_points,total_points(self.input_file),)
 
     def test_buffer_creates_overlap(self):
