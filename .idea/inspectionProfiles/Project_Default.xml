@@ -1,0 +1,102 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="absl-py" />
+          <option value="argon2-cffi" />
+          <option value="argon2-cffi-bindings" />
+          <option value="arrow" />
+          <option value="astunparse" />
+          <option value="async-lru" />
+          <option value="babel" />
+          <option value="beautifulsoup4" />
+          <option value="bleach" />
+          <option value="comm" />
+          <option value="debugpy" />
+          <option value="defusedxml" />
+          <option value="fastjsonschema" />
+          <option value="flatbuffers" />
+          <option value="fqdn" />
+          <option value="gast" />
+          <option value="google-pasta" />
+          <option value="grpcio" />
+          <option value="httpcore" />
+          <option value="httpx" />
+          <option value="ipykernel" />
+          <option value="ipywidgets" />
+          <option value="isoduration" />
+          <option value="json5" />
+          <option value="jsonpointer" />
+          <option value="jupyter" />
+          <option value="jupyter-client" />
+          <option value="jupyter-console" />
+          <option value="jupyter-core" />
+          <option value="jupyter-events" />
+          <option value="jupyter-lsp" />
+          <option value="jupyter-server" />
+          <option value="jupyter-server-terminals" />
+          <option value="jupyterlab" />
+          <option value="jupyterlab-pygments" />
+          <option value="jupyterlab-server" />
+          <option value="jupyterlab-widgets" />
+          <option value="keras" />
+          <option value="lark" />
+          <option value="libclang" />
+          <option value="markdown" />
+          <option value="mistune" />
+          <option value="ml-dtypes" />
+          <option value="namex" />
+          <option value="nbclient" />
+          <option value="nbconvert" />
+          <option value="nbformat" />
+          <option value="nest-asyncio" />
+          <option value="notebook" />
+          <option value="notebook-shim" />
+          <option value="opt-einsum" />
+          <option value="optree" />
+          <option value="pandocfilters" />
+          <option value="prometheus-client" />
+          <option value="python-json-logger" />
+          <option value="pywinpty" />
+          <option value="pyyaml" />
+          <option value="pyzmq" />
+          <option value="rfc3339-validator" />
+          <option value="rfc3986-validator" />
+          <option value="rfc3987-syntax" />
+          <option value="send2trash" />
+          <option value="soupsieve" />
+          <option value="tensorboard" />
+          <option value="tensorboard-data-server" />
+          <option value="tensorflow" />
+          <option value="termcolor" />
+          <option value="terminado" />
+          <option value="tinycss2" />
+          <option value="uri-template" />
+          <option value="webcolors" />
+          <option value="webencodings" />
+          <option value="websocket-client" />
+          <option value="werkzeug" />
+          <option value="wheel" />
+          <option value="widgetsnbextension" />
+          <option value="docker-py" />
+          <option value="narwhals" />
+          <option value="pywin32" />
+          <option value="scikit-learn" />
+          <option value="skleam" />
+          <option value="threadpoolctl" />
+          <option value="xlwings" />
+          <option value="opencv-python-headless" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyStubPackagesAdvertiser" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="pandas" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

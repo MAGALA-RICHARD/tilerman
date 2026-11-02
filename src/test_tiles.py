@@ -234,9 +234,7 @@ class TestTileCloudByLength(unittest.TestCase):
             total_points(self.input_file),)
 
     def test_single_large_tile(self):
-        outputs = tile_cloud_by_length(self.input_file,
-            self.output_pattern,
-            length=100.0,)
+        outputs = tile_cloud_by_length(self.input_file, self.output_pattern, length=100.0,)
 
         self.assertEqual(len(outputs), 1)
         self.assertEqual(
@@ -244,48 +242,30 @@ class TestTileCloudByLength(unittest.TestCase):
             total_points(self.input_file),)
 
     def test_tile_extent_respects_length_without_buffer(self):
-        outputs = tile_cloud_by_length(
-            self.input_file,
-            self.output_pattern,
-            length=5.0,
-            buffer=0.0,)
-
+        outputs = tile_cloud_by_length(self.input_file,self.output_pattern,length=5.0,buffer=0.0,)
         for output in outputs:
             las = laspy.read(output)
-
             width = np.asarray(las.x).max() - np.asarray(las.x).min()
             height = np.asarray(las.y).max() - np.asarray(las.y).min()
-
             self.assertLess(width, 5.0)
             self.assertLess(height, 5.0)
 
     def test_points_are_not_lost(self):
         original = laspy.read(self.input_file)
-
         outputs = tile_cloud_by_length(
             self.input_file,
             self.output_pattern,
-            length=5.0,
-        )
+            length=5.0, )
 
-        original_xyz = {
-            tuple(row)
-            for row in np.column_stack(
-                (original.x, original.y, original.z)
-            )
-        }
+        original_xyz = { tuple(row)
+            for row in np.column_stack( (original.x, original.y, original.z) )}
 
         tiled_xyz = set()
-
         for output in outputs:
             las = laspy.read(output)
-
-            tiled_xyz.update(
-                tuple(row)
+            tiled_xyz.update(tuple(row)
                 for row in np.column_stack(
-                    (las.x, las.y, las.z)
-                )
-            )
+                    (las.x, las.y, las.z)))
 
         self.assertEqual(tiled_xyz, original_xyz)
 
