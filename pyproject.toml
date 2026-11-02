@@ -31,7 +31,7 @@ classifiers = [
 ]
 
 [tool.setuptools]
-package-dir = {"" = "src"}
+package-dir = {"" = "tilerman"}
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["tilerman"]
