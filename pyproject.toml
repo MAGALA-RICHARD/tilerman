@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tilerman"
+version = "0.1.0"
+description = "LAS/LAZ point-cloud tiling utilities by spatial extent and point capacity."
+readme = "README.rst"
+requires-python = ">=3.12"
+dependencies = [
+    "laspy[lazrs]>=2.5",
+    "numpy>=1.26",
+]
+
+keywords = [
+    "point-cloud",
+    "las",
+    "laz",
+    "tiling",
+    "lidar",
+    "geospatial",
+]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: GIS",
+]
+
+[project.optional-dependencies]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v"
