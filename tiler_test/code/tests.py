@@ -6,6 +6,7 @@ import unittest
 import numpy as np
 import laspy
 from tilerman.tiles import tile_cloud_by_capacity, tile_cloud_by_length, tile_cloud_by_number
+from tilerman.tiles import cloud_capacity as total_points
 
 LAZ_FILENAME =  Path('../tiler_test/synthetic.laz')
 def sample_cloud(filename, n=10,):
@@ -30,9 +31,6 @@ def sample_cloud(filename, n=10,):
     las.write(path)
     return path
 
-
-def total_points(laz_file):
-    return len(laspy.read(laz_file).points)
 
 def creat_synthetic_cloud(file_name, size = 3266231):
     out = Path(file_name).resolve()
@@ -95,7 +93,7 @@ class TestTiles(unittest.TestCase):
         print(expected_tiles, 'expected_tiles')
         self.assertEqual(  len(outputs),
             expected_tiles,  )
-    def test_tile_by_number(self):
+    def test_tile_cloud_by_number(self):
         """test tile by capacity for expected tiles"""
         outputs = tile_cloud_by_number(
             self.input_file,
@@ -105,7 +103,6 @@ class TestTiles(unittest.TestCase):
         outputs =tuple(outputs)
         self.assertGreater(len(outputs), 0)
         expected_tiles = 2
-        print(expected_tiles, 'expected_tiles')
         self.assertEqual(  len(outputs),
             expected_tiles,  )
         total = total_points(self.input_file)

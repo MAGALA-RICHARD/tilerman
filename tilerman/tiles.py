@@ -179,7 +179,7 @@ def tile_cloud_by_length(input_file, output_pattern, length, buffer=0.0):
 
     return outputs
 
-def number_of_points(las_file):
+def cloud_capacity(las_file):
     """Return the number of points without loading the full point cloud."""
     with laspy.open(las_file) as reader:
         return reader.header.point_count
@@ -191,7 +191,7 @@ def tile_cloud_by_number(laz_file, k, output_pattern=None):
     if k <= 0:
         raise ValueError("k must be greater than zero")
     laz_file = Path(laz_file)
-    points = number_of_points(laz_file)
+    points = cloud_capacity(laz_file)
     capacity = ceil(points / k)
     output_pattern = output_pattern or laz_file.with_name(f"{laz_file.stem}_tile_#{laz_file.suffix}")
     return tile_cloud_by_capacity(laz_file, output_pattern, capacity=capacity)
