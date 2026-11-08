@@ -185,7 +185,7 @@ def number_of_points(las_file):
         return reader.header.point_count
 
 
-def tile_cloud_by_number(laz_file, k):
+def tile_cloud_by_number(laz_file, k, output_pattern=None):
     """Split a point cloud into approximately k tiles. Uses tile_cloud_by_capacity. under the hood"""
 
     if k <= 0:
@@ -193,5 +193,5 @@ def tile_cloud_by_number(laz_file, k):
     laz_file = Path(laz_file)
     points = number_of_points(laz_file)
     capacity = ceil(points / k)
-    output_pattern = laz_file.with_name(f"{laz_file.stem}_tile_#{laz_file.suffix}")
+    output_pattern = output_pattern or laz_file.with_name(f"{laz_file.stem}_tile_#{laz_file.suffix}")
     return tile_cloud_by_capacity(laz_file, output_pattern, capacity=capacity)

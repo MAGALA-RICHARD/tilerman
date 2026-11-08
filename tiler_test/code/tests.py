@@ -5,7 +5,7 @@ from functools import cache
 import unittest
 import numpy as np
 import laspy
-from tilerman.tiles import tile_cloud_by_capacity, tile_cloud_by_length
+from tilerman.tiles import tile_cloud_by_capacity, tile_cloud_by_length, tile_cloud_by_number
 
 LAZ_FILENAME =  Path('../tiler_test/synthetic.laz')
 def sample_cloud(filename, n=10,):
@@ -97,17 +97,22 @@ class TestTiles(unittest.TestCase):
             expected_tiles,  )
     def test_tile_by_number(self):
         """test tile by capacity for expected tiles"""
-        outputs = tile_cloud_by_capacity(
+        outputs = tile_cloud_by_number(
             self.input_file,
-            self.output_pattern,
-            capacity=self.capacity,)
+            k=2,
+            output_pattern=self.output_pattern,)
         # unzip clouds
         outputs =tuple(outputs)
         self.assertGreater(len(outputs), 0)
-        expected_tiles = ( self.tp + self.capacity - 1 ) // self.capacity
+        expected_tiles = 2
         print(expected_tiles, 'expected_tiles')
         self.assertEqual(  len(outputs),
             expected_tiles,  )
+        total = total_points(self.input_file)
+        out_total = 0
+        for output in outputs:
+            out_total += total_points(output)
+        self.assertEqual(out_total, total)
 
     def test_each_tile_respects_capacity(self):
         outputs = tile_cloud_by_capacity(self.input_file, self.output_pattern, capacity=self.capacity, )
