@@ -1,7 +1,7 @@
 from pathlib import Path
 import laspy
 import numpy as np
-
+from math import ceil
 
 def _part1by1(n):
     n = n.astype(np.uint64)
@@ -178,3 +178,20 @@ def tile_cloud_by_length(input_file, output_pattern, length, buffer=0.0):
             index += 1
 
     return outputs
+
+def number_of_points(las_file):
+    """Return the number of points without loading the full point cloud."""
+    with laspy.open(las_file) as reader:
+        return reader.header.point_count
+
+
+def tile_cloud_by_number(laz_file, k):
+    """Split a point cloud into approximately k tiles. Uses tile_cloud_by_capacity. under the hood"""
+
+    if k <= 0:
+        raise ValueError("k must be greater than zero")
+    laz_file = Path(laz_file)
+    points = number_of_points(laz_file)
+    capacity = ceil(points / k)
+    output_pattern = laz_file.with_name(f"{laz_file.stem}_tile_#{laz_file.suffix}")
+    return tile_cloud_by_capacity(laz_file, output_pattern, capacity=capacity)

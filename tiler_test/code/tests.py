@@ -95,6 +95,19 @@ class TestTiles(unittest.TestCase):
         print(expected_tiles, 'expected_tiles')
         self.assertEqual(  len(outputs),
             expected_tiles,  )
+    def test_tile_by_number(self):
+        """test tile by capacity for expected tiles"""
+        outputs = tile_cloud_by_capacity(
+            self.input_file,
+            self.output_pattern,
+            capacity=self.capacity,)
+        # unzip clouds
+        outputs =tuple(outputs)
+        self.assertGreater(len(outputs), 0)
+        expected_tiles = ( self.tp + self.capacity - 1 ) // self.capacity
+        print(expected_tiles, 'expected_tiles')
+        self.assertEqual(  len(outputs),
+            expected_tiles,  )
 
     def test_each_tile_respects_capacity(self):
         outputs = tile_cloud_by_capacity(self.input_file, self.output_pattern, capacity=self.capacity, )
