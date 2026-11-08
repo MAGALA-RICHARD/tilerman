@@ -187,7 +187,6 @@ def cloud_capacity(las_file):
 
 def tile_cloud_by_number(laz_file, k, output_pattern=None):
     """Split a point cloud into approximately k tiles. Uses tile_cloud_by_capacity. under the hood"""
-
     if k <= 0:
         raise ValueError("k must be greater than zero")
     laz_file = Path(laz_file)
