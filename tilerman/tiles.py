@@ -48,7 +48,7 @@ def tile_cloud_by_capacity(laz_file, output_pattern, capacity=100_000):
 
         Returns
         -------
-        list[Path]
+        generator[Path]
             Paths to the generated tile files, in tile creation order.
 
         Raises
@@ -89,8 +89,8 @@ def tile_cloud_by_capacity(laz_file, output_pattern, capacity=100_000):
         tile = laspy.LasData(las.header)
         tile.points = las.points[ids]
         tile.write(str(out.resolve()))
-        outputs.append(out)
-    return outputs
+        yield out
+
 
 
 def tile_cloud_by_length(input_file, output_pattern, length, buffer=0.0):

@@ -88,6 +88,8 @@ class TestTiles(unittest.TestCase):
             self.input_file,
             self.output_pattern,
             capacity=self.capacity,)
+        # unzip clouds
+        outputs =tuple(outputs)
         self.assertGreater(len(outputs), 0)
         expected_tiles = ( self.tp + self.capacity - 1 ) // self.capacity
         print(expected_tiles, 'expected_tiles')
@@ -145,21 +147,23 @@ class TestTiles(unittest.TestCase):
             self.input_file,
             self.output_pattern,
             capacity=self.tp + 1, )
+        outputs =tuple(outputs)
         print(total_points(outputs[0]))
         self.assertEqual(len(outputs), 1)
         self.assertEqual(total_points(outputs[0]), self.tp,)
 
     def test_invalid_capacity(self):
         with self.assertRaises(ValueError):
-            tile_cloud_by_capacity(
+            tuple(tile_cloud_by_capacity(
                 self.input_file,
                 self.output_pattern,
-                capacity=0, )
+                capacity=0, ))
 
     def test_missing_hash(self):
         with self.assertRaises(ValueError):
-            tile_cloud_by_capacity(
+            tm = tile_cloud_by_capacity(
                 self.input_file, self.output_dir / "tile.laz",capacity=self.capacity,)
+            _= tuple(tm)
 
     @classmethod
     def tearDownClass(cls):
