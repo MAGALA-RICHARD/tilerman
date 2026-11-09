@@ -74,7 +74,7 @@ Import the tiling functions:
 .. code-block:: python
 
    from tilerman.tiles import (
-       tile_by_capacity as tile_cloud_by_capacity,
+       tile_cloud_by_capacity
        tile_cloud_by_length,
    )
 
@@ -92,9 +92,9 @@ Example:
 
 .. code-block:: python
 
-   from tilerman.tiles import tile_by_capacity
+   from tilerman.tiles import tile_cloud_by_capacity
 
-   outputs = tile_by_capacity(
+   outputs =tile_cloud_by_capacity(
        "data/cloud.laz",
        "tiles/tile_#.laz",
        capacity=300_000,
@@ -188,7 +188,7 @@ Example:
 
 .. code-block:: python
 
-   tile_by_capacity(
+  tile_cloud_by_capacity(
        "cloud.laz",
        "results/tiles/tile_#.laz",
        capacity=250_000,
@@ -247,9 +247,9 @@ The following example performs both types of tiling:
 
 .. code-block:: python
 
-   from tilerman.tiles import tile_by_capacity, tile_cloud_by_length
+   from tilerman.tiles importtile_cloud_by_capacity, tile_cloud_by_length
 
-   capacity_tiles = tile_by_capacity(
+   capacity_tiles =tile_cloud_by_capacity(
        "data/model.laz",
        "output/capacity/tile_#.laz",
        capacity=300_000,

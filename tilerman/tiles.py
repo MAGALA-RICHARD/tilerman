@@ -179,10 +179,13 @@ def tile_cloud_by_length(input_file, output_pattern, length, buffer=0.0):
 
     return outputs
 
-def cloud_capacity(las_file):
+def cloud_capacity(*las_file):
     """Return the number of points without loading the full point cloud."""
-    with laspy.open(las_file) as reader:
-        return reader.header.point_count
+    count = 0
+    for las_f in las_file:
+        with laspy.open(las_f) as reader:
+            count += reader.header.point_count
+    return count
 
 
 def tile_cloud_by_number(laz_file, k, output_pattern=None):
