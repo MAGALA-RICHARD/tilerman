@@ -2,3 +2,4 @@ laspy
 lazpy
 numpy
 lazrs
+rasterio

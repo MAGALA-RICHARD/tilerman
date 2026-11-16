@@ -97,8 +97,7 @@ Example:
    outputs =tile_cloud_by_capacity(
        "data/cloud.laz",
        "tiles/tile_#.laz",
-       capacity=300_000,
-   )
+       capacity=300_000,)
 
    for output in outputs:
        print(output)
